@@ -1,4 +1,4 @@
-import React, {ChangeEvent,  useRef,} from 'react';
+import React, {ChangeEvent, useEffect, useRef,} from 'react';
 import  './Content.css'
 
 type PropsType = {
@@ -25,6 +25,23 @@ export const Content = ({change, text}: PropsType) => {
         console.log(json)
     }
 
+    // useEffect(()=> {
+    //  function  formatText  (sCnd: string, value:string)  {
+    //         document.execCommand(sCnd, false, value)
+    //
+    //         document.execCommand('copy')
+    //         navigator.clipboard.readText().then(text=> {
+    //             const newObj = {
+    //                 text: text,
+    //                 fontSize: value,
+    //                 color: 'red'
+    //             }
+    //
+    //             debugger
+    //         })
+    //     }
+    // }, [])
+
     const formatText = (sCnd: string, value:string): void => {
          document.execCommand(sCnd, false, value)
 
@@ -38,10 +55,9 @@ export const Content = ({change, text}: PropsType) => {
 
             debugger
         })
-
     }
 
-    //execCommand(String aCommandName, Boolean aShowDefaultUI, String aValueArgument)
+
 
     // const changeFontSize = (e: ChangeEvent<HTMLSelectElement>): void => {
     //     console.log(e.currentTarget.value)
@@ -56,7 +72,11 @@ export const Content = ({change, text}: PropsType) => {
     // }
 
     const fontSizeArray = [
-        "8px", "10px", "12px", "14px", "16px", "18px", "20px"
+        // "8px", "10px", "12px", "14px", "16px", "18px", "20px",
+        1, 2, 3, 4, 5, 6, 7
+    ]
+    const colorArray = [
+        "red", "green", "yellow", "blue", "black", "brown", "greenyellow", "pink"
     ]
 
     return (
@@ -67,24 +87,15 @@ export const Content = ({change, text}: PropsType) => {
                     font size
                     {fontSizeArray.map(f =>  <option key={f} value={f}>{f}</option>)}
                 </select >
-                {/*<select onChange={formatText}>*/}
-                {/*    <option value="red">red</option>*/}
-                {/*    <option value="green">green</option>*/}
-                {/*    <option value="yellow">yellow</option>*/}
-                {/*    <option value="blue">blue</option>*/}
-                {/*    <option value="black">black</option>*/}
-                {/*    <option value="greenyellow">greenyellow</option>*/}
-                {/*    <option value="pink">pink</option>*/}
-                {/*</select>*/}
-                {/*<select onChange={formatText}>*/}
-                {/*    <option value="red">red</option>*/}
-                {/*    <option value="green">green</option>*/}
-                {/*    <option value="yellow">yellow</option>*/}
-                {/*    <option value="blue">blue</option>*/}
-                {/*    <option value="black">black</option>*/}
-                {/*    <option value="greenyellow">greenyellow</option>*/}
-                {/*    <option value="pink">pink</option>*/}
-                {/*</select>*/}
+                <select onChange={(e) =>formatText('foreColor', e.currentTarget.value)}> color
+                    {colorArray.map(c => <option key={c} value={c}>{c}</option>)}
+
+
+                </select>
+                <select onChange={(e) =>formatText('backColor', e.currentTarget.value)}>
+                    background color
+                    {colorArray.map(c => <option key={c} value={c}>{c}</option>)}
+                </select>
             </form>
 
             <div contentEditable={'true'} style={{
