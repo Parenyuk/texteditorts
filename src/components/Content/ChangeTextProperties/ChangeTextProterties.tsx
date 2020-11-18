@@ -27,10 +27,7 @@ export const ChangeTextProperties = ({/*formatFontSize, formatColor, formatBackg
     return (
         <>
             <div className={'form'}>
-                <select className={'selectItems'} onChange={(e) => {
-                    // debugger
-                    return formatText('fontSize',  e.currentTarget[+e.currentTarget.value].innerHTML )
-                }}>
+                <select className={'selectItems'} onChange={(e) => formatText('fontSize',  e.currentTarget[+e.currentTarget.value].innerHTML )}>
                     font size
                     {fontSizeArray.map(f => <option key={f.key} value={f.key}>{f.value}</option>)}
                 </select>
@@ -42,18 +39,7 @@ export const ChangeTextProperties = ({/*formatFontSize, formatColor, formatBackg
                     background color
                     {bgColorArray.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
-                {/*<select className={'selectItems'} onChange={(e) => formatText('fontSize', {fontSize: e.currentTarget.value})}>*/}
-                {/*    font size*/}
-                {/*    {fontSizeArray.map(f => <option key={f.key} value={f.key}>{f.value}</option>)}*/}
-                {/*</select>*/}
-                {/*<select className={'selectItems'}*/}
-                {/*        onChange={(e) => formatText('foreColor', {color: e.currentTarget.value})}> color*/}
-                {/*    {colorArray.map(c => <option key={c} value={c}>{c}</option>)}*/}
-                {/*</select>*/}
-                {/*<select className={'selectItems'} onChange={(e) => formatText('backColor', {bgColor: e.currentTarget.value})}>*/}
-                {/*    background color*/}
-                {/*    {bgColorArray.map(c => <option key={c} value={c}>{c}</option>)}*/}
-                {/*</select>*/}
+
                 <button onClick={toJSON} className={'buttonToJSON'} >Convert to JSON</button>
             </div>
         </>
