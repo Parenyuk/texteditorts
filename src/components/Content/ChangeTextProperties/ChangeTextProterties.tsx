@@ -16,6 +16,7 @@ const fontSizeArray = [
 const colorArray = [
     'color', 'red', 'green', 'yellow', 'blue', 'black', 'brown', 'greenyellow', 'pink'
 ]
+
 const bgColorArray = [
     'background color', 'red', 'green', 'yellow', 'blue', 'black', 'brown', 'greenyellow', 'pink'
 ]
