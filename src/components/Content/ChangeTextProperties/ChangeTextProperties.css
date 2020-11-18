@@ -1,9 +1,11 @@
-.form {
+.selectFields {
     padding-bottom: 30px;
 }
+
 .selectItems {
     margin-left: 10px;
 }
+
 .buttonToJSON {
     background-color: navy;
     margin-left: 10px;

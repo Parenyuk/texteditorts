@@ -2,11 +2,8 @@ import React from 'react';
 import './ChangeTextProperties.css'
 
 type PropsType = {
-    /*formatFontSize(f: string, value: string ): void
-    formatColor(f: string, value: string ): void
-    formatBackground(f: string, value: string ): void*/
-    formatText(f: string, value: string ): void
-    toJSON: ()=> void
+    formatText(f: string, value: string): void
+    toJSON: () => void
 }
 const fontSizeArray = [
     {key: 0, value: 'font size'}, {key: 1, value: '10px'}, {key: 2, value: '12px'}, {
@@ -23,16 +20,17 @@ const bgColorArray = [
     'background color', 'red', 'green', 'yellow', 'blue', 'black', 'brown', 'greenyellow', 'pink'
 ]
 
-export const ChangeTextProperties = ({/*formatFontSize, formatColor, formatBackground,*/ formatText, toJSON}: PropsType) => {
+export const ChangeTextProperties = ({ formatText, toJSON}: PropsType) => {
     return (
         <>
-            <div className={'form'}>
-                <select className={'selectItems'} onChange={(e) => formatText('fontSize',  e.currentTarget[+e.currentTarget.value].innerHTML )}>
+            <div className={'selectFields'}>
+                <select className={'selectItems'}
+                        onChange={(e) => formatText('fontSize', e.currentTarget[+e.currentTarget.value].innerHTML)}>
                     font size
                     {fontSizeArray.map(f => <option key={f.key} value={f.key}>{f.value}</option>)}
                 </select>
                 <select className={'selectItems'}
-                        onChange={(e) => formatText('foreColor',  e.currentTarget.value)}> color
+                        onChange={(e) => formatText('foreColor', e.currentTarget.value)}> color
                     {colorArray.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
                 <select className={'selectItems'} onChange={(e) => formatText('backColor', e.currentTarget.value)}>
@@ -40,9 +38,9 @@ export const ChangeTextProperties = ({/*formatFontSize, formatColor, formatBackg
                     {bgColorArray.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
 
-                <button onClick={toJSON} className={'buttonToJSON'} >Convert to JSON</button>
+                <button onClick={toJSON} className={'buttonToJSON'}>Convert to JSON</button>
             </div>
         </>
-        )
-  };
+    )
+};
 
