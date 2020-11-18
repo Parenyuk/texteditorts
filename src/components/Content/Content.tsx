@@ -1,66 +1,157 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Content.css'
+import {ChangeTextProperties} from './ChangeTextProperties/ChangeTextProterties';
 
 
 export const Content = () => {
 
 
+    const [onj, setOnj] = useState({
+        text: '',
+        fontSize: '',
+        color: '',
+        backgroundColor: ''
+    })
 
 
     const formatText = (sCnd: string, value: string): void => {
         document.execCommand(sCnd, false, value)
         document.execCommand('copy')
         navigator.clipboard.readText().then(text => {
-            const newObj = {
-                text: text,
-                fontSize: value,
-                color: value,
-                backgroundColor: value
+
+            switch (sCnd) {
+                case 'fontSize' :  {
+                    let newObj = {...onj, fontSize: value, text}
+                    setOnj(newObj)
+                    break
+                }
+
+                case 'foreColor' :  {
+                    let newObj = {...onj, color: value, text }
+                    setOnj(newObj)
+                    break
+                }
+
             }
 
 
-            // console.log(newObj)
+
 
         })
-
-
     }
 
-    // const toJSON = (newObj: any) => {
-    //     const json = JSON.stringify(newObj)
-    //     console.log(json)
+    const toJSON = () => {
+        const json = JSON.stringify(onj)
+        console.log(json)
+    }
+
+    // const formatText = (sCnd: string, {fontSize, color, bgColor}:any): void => {
+    //
+    //
+    //
+    //     document.execCommand(sCnd, false, value)
+    //     document.execCommand('copy')
+    //     navigator.clipboard.readText().then(text => {
+    //
+    //         type aType={
+    //             text: string,
+    //             fontSize?:string
+    //             color?: string,
+    //             backgroundColor?: string
+    //         }
+    //
+    //
+    //         let a:aType={
+    //             text: text,
+    //         }
+    //
+    //         if (fontSize) a['fontSize'] = fontSize
+    //         if (color) a['color'] = color
+    //         if (bgColor) a['backgroundColor'] = bgColor
+    //         // const newObj = {
+    //         //     text: text,
+    //         //     fontSize: value,
+    //         //     color: value,
+    //         //     backgroundColor: value
+    //         // }
+    //
+    //
+    //         console.log(a)
+    //
+    //     })
     // }
 
-    const fontSizeArray = [
-        {key: 0, value: 'font size'}, {key: 1, value: '10px'}, {key: 2, value: '12px'}, {
-            key: 3,
-            value: '14px'
-        }, {key: 4, value: '18px'},
-        {key: 5, value: '24px'}, {key: 6, value: '36px'}, {key: 7, value: '48px'},
 
-    ]
-    const colorArray = [
-        'color', 'red', 'green', 'yellow', 'blue', 'black', 'brown', 'greenyellow', 'pink'
-    ]
+
+
+
+    // const formatText = (sCnd: string, {...values}: any ): void => {
+
+    //     const formatText = (sCnd: string, {fontSize, color, bgColor}: any ): void => {
+    //
+    //
+    //     document.execCommand(sCnd, false, values)
+    //     document.execCommand('copy')
+    //     navigator.clipboard.readText().then(text => {
+    //         const newObj = {
+    //             text: text,
+    //             fontSize: values,
+    //             color: values,
+    //             backgroundColor: values
+    //         }
+    //
+    //
+    //         console.log(newObj)
+    //
+    //     })
+    //
+    //
+    // }
+
+
+    //second variant: now do not work right
+    // const formatFontSize = (sCnd: string, fontSize: string) => {
+    //         document.execCommand(sCnd, false, fontSize)
+    //         console.log(fontSize)
+    //     return formatText(fontSize, null, null)
+    //     // return fontSize
+    // }
+    // const formatColor = (sCnd: string, color: string) => {
+    //     document.execCommand(sCnd, false, color)
+    //     return formatText(null, color, null)
+    //     // return color
+    // }
+    //
+    // const formatBackground = (sCnd: string, bgColor: string) => {
+    //     document.execCommand(sCnd, false, bgColor)
+    //     return formatText(null, null, bgColor)
+    //     return bgColor
+    // }
+
+    // const formatText = (fontSize: string | null, color: string | null, bgColor: string | null): void =>  {
+    //     document.execCommand('copy')
+    //     navigator.clipboard.readText().then(text => {
+    //         const newObj = {
+    //             text: text,
+    //             fontSize: fontSize,
+    //             color: color,
+    //             backgroundColor: bgColor
+    //         }
+    //
+    //
+    //         console.log(newObj)
+    //
+    //     })
+
+
+    // }
+
 
     return (
 
         <>
-            <form className={'form'}>
-                <select className={'selectItems'} onChange={(e) => formatText('fontSize', e.currentTarget.value)}>
-                    font size
-                    {fontSizeArray.map(f => <option key={f.key} value={f.key}>{f.value}</option>)}
-                </select>
-                <select className={'selectItems'}
-                        onChange={(e) => formatText('foreColor', e.currentTarget.value)}> color
-                    {colorArray.map(c => <option key={c} value={c}>{c}</option>)}
-                </select>
-                <select className={'selectItems'} onChange={(e) => formatText('backColor', e.currentTarget.value)}>
-                    background color
-                    {colorArray.map(c => <option key={c} value={c}>{c}</option>)}
-                </select>
-                <button /*onClick={toJSON}*/ >Convert to JSON</button>
-            </form>
+            <ChangeTextProperties  toJSON={toJSON} /*formatFontSize={formatFontSize} formatColor={formatColor} formatBackground={formatBackground}*/
+                formatText={formatText}/>
             <div contentEditable={'true'}
                  className={'textarea'}>
             </div>

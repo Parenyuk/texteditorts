@@ -1,4 +1,4 @@
-import React, {FormEvent, useState} from 'react';
+import React from 'react';
 import './App.css';
 import {Content} from './components/Content/Content';
 
