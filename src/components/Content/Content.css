@@ -1,0 +1,16 @@
+.form {
+    padding-bottom: 30px;
+
+
+}
+.textarea {
+    min-height: 500px;
+    min-width: 1200px;
+    outline: 0px solid transparent;
+    border: 0.5px solid #C6C6C6;
+    padding: 10px;
+    background-color: white;
+}
+.selectItems {
+    margin-left: 10px;
+}
